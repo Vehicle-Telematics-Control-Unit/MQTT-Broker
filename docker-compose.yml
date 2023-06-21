@@ -8,7 +8,7 @@ networks:
 
 services:
   mqtt-broker:
-    image: emqx/emqx:5.0.26
+    image: emqx/emqx:latest
     restart: always
     ports:
       - 1883:1883
@@ -16,6 +16,8 @@ services:
       - 8084:8084
       - 8883:8883
       - 127.0.0.1:18083:18083
+    volumes:
+      - /opt/emqx:/opt/emqx/
     networks:
       MQTT-Broker-Network:
         ipv4_address: 163.60.0.5
