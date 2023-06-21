@@ -22,7 +22,7 @@ services:
   auth-server-service:
     image: registry.digitalocean.com/vehicle-plus/mqtt-auth:latest
     restart: always
-    command: bash -c "MQTT-Authentication-Server.dll"
+    command: bash -c "dotnet MQTT-Authentication-Server.dll"
     volumes:
       - ./appsettings.json:/app/appsettings.json
     networks:
