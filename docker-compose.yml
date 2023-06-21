@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  MQTT-Broker-Network:
+    ipam:
+      config:
+        - subnet: 163.60.0.0/16
+
+services:
+  mqtt-broker:
+    image: emqx/emqx:5.0.26
+    restart: always
+    ports:
+      - 1883:1883
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 127.0.0.1:18083:18083
+    networks:
+      MQTT-Broker-Network:
+        ipv4_address: 163.60.0.5
+  auth-server-service:
+    image: registry.digitalocean.com/vehicle-plus/mqtt-auth:latest
+    restart: always
+    command: bash -c "MQTT-Authentication-Server.dll"
+    volumes:
+      - ./appsettings.json:/app/appsettings.json
+    networks:
+      MQTT-Broker-Network:
+        ipv4_address: 163.60.0.10
+  
