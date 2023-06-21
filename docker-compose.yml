@@ -28,4 +28,6 @@ services:
     networks:
       MQTT-Broker-Network:
         ipv4_address: 163.60.0.10
+    ports:
+      - 6110:80
   
